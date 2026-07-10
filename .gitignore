@@ -11,18 +11,10 @@
 *.gch
 *.pch
 
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
 # Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-*.so.*
-
 
 # Fortran module files
 *.mod
@@ -39,31 +31,45 @@
 *.out
 *.app
 
-# Build directories
+### VisualStudio ###
+## Ignore Visual Studio temporary files and build results
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
 build/
-Build/
-build-*/
+bld/
+[Bb]in/
+[Oo]bj/
 
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
+# Visual C++ cache files
+**/.vs/
+**/ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
 
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
 
-# vcpkg
-vcpkg_installed/
+### VisualStudioCode ###
+**/.vscode/
 
-# debug information files
-*.dwo
+# Local History for Visual Studio Code
+**/.history/
 
-# test output & cache
-Testing/
-.cache/
+# Built Visual Studio Code Extensions
+*.vsix
