@@ -7,6 +7,7 @@ private:
 	struct ShapeConcept {
 	public:
 		virtual void Draw() const = 0;
+		virtual std::unique_ptr<ShapeConcept> Clone() const = 0;
 		virtual ~ShapeConcept() = default;
 	};
 
@@ -16,9 +17,14 @@ private:
 		ShapeModel(T&& object) : _object(std::forward<T>(object)) 
 		{};
 
-		void Draw() const override
+		void Draw() const override final
 		{
 			::Draw(_object);
+		}
+
+		std::unique_ptr<ShapeConcept> Clone() const override final
+		{
+			return std::make_unique<ShapeModel>(*this);
 		}
 
 		virtual ~ShapeModel() = default;
@@ -38,9 +44,19 @@ public:
 	Shape(T&& object) : _modelImpl{ new ShapeModel<T>(std::forward<T>(object)) }
 	{};
 
-	Shape(const Shape& shape) = delete;
+	Shape(const Shape& shape);
 	Shape(Shape&& shape) noexcept = default;
-	Shape& operator=(const Shape& shape) = delete;
+	Shape& operator=(const Shape& shape);
 	Shape& operator=(Shape&& shape) noexcept = default;
 
 };
+
+Shape::Shape(const Shape& shape) : _modelImpl{shape._modelImpl->Clone()}
+{}
+
+Shape& Shape::operator=(const Shape& shape)
+{
+	_modelImpl = shape._modelImpl->Clone();
+
+	return *this;
+}
